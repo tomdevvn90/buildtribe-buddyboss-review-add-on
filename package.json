@@ -1,0 +1,17 @@
+{
+  "name": "package-buildtribe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "sass assets/scss/main.scss:assets/css/main.css --style compressed --watch",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fine-uploader": "^5.16.2"
+  }
+}
