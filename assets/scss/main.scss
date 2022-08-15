@@ -1,1 +1,319 @@
+@property --p{
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
 
+$screen-tab: 1300px - 0.01;
+$screen-tab-2: 992px - 0.01;
+$screen-mb: 783px - 0.01;
+
+@keyframes bbr-animation-pulse{
+  25%{transform:scale(1.1)}
+  75%{transform:scale(0.9)}
+}
+
+.bbr-verified{
+
+  padding-top: 10px;
+
+  @media (min-width: $screen-mb) and (max-width: $screen-tab-2){
+    margin-left: -33%;
+  }
+
+  .bbr-container{
+    display: flex;
+    align-items: start;
+
+    @media (max-width: $screen-mb){
+      display: block;
+    }
+
+  }
+
+  &--badge{
+    width: 100px;
+    padding-right: 10px;
+    .badge-verified{
+      width: 100%;
+    }
+
+    @media (max-width: $screen-mb){
+      margin: auto;
+    }
+
+  }
+
+  &--infor{
+    width: calc(100% - 100px);
+    padding-left: 10px;
+
+    @media (max-width: $screen-mb){
+      width: 100%;
+      margin-top: 10px;
+    }
+
+  }
+
+  &--content-infor{
+    display: flex;
+    align-items: center;
+    @media (max-width: $screen-mb){
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  &--criteria-list{
+    display: flex;
+    .bbr-pie{
+      &--circle{
+        --p:20;
+        --b:8px;
+        --c:#1DA1F2;
+        --w:45px;
+
+        width:var(--w);
+        aspect-ratio:1;
+        position:relative;
+        display:inline-grid;
+        place-content:center;
+        font-size:10px;
+        font-weight:bold;
+        font-family:sans-serif;
+        color: #333;
+        margin: 0 5px;
+        background: black;
+        border-radius: 50%;
+
+        &:before,&:after{
+          content:"";
+          position:absolute;
+          border-radius:50%;
+        }
+
+        &:before{
+          inset:0;
+          background:
+            radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+            conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+          -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+          mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+        }
+
+        &:after{
+          inset:calc(50% - var(--b)/2);
+          background:var(--c);
+          transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+        }
+
+        &.animate{
+          animation:p 1s .5s both;
+        }
+
+      }
+
+      &--text{
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        margin-top: 5px;
+        font-size: 8px;
+
+      }
+
+      &--value{
+        background: #fff;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: normal;
+        @media (max-width: $screen-tab){
+          width: 30px;
+          height: 30px;
+          font-size: 10px;
+        }
+      }
+
+    }
+  }
+
+  &--date-review{
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+
+    .link-infor{
+      margin-right: 4px;
+      line-height: 0;
+      &.bbr-tooltip{
+        position: relative;
+        &:before{
+          content: attr(data-tooltip);
+          position: absolute;
+          width: 200px;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          padding: 10px;
+          line-height: 1.2;
+          border-radius: 6px;
+          z-index: 1;
+          opacity: 0;
+          transition: opacity .6s;
+          bottom: 125%;
+          left: 50%;
+          margin-left: -60px;
+          font-size: 0.75em;
+          visibility: hidden;
+          text-transform: none;
+        }
+        &:after{
+          content: "";
+          position: absolute;
+          bottom: 75%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          opacity: 0;
+          transition: opacity .6s;
+          border-color: #062B45 transparent transparent transparent;
+          visibility: hidden;
+        }
+        &:hover{
+          &:before,&:after{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+
+      .glow-btn{
+        display: inline-flex;
+        width: 14px;
+        height: 14px;
+        align-items: center;
+        justify-content: center;
+        .dashicons{
+          font-size: 18px;
+        }
+      }
+
+    }
+  }
+
+  &--btn{
+      padding-left: 20px;
+
+      @media (max-width: $screen-tab){
+        padding-left: 10px;
+      }
+
+      .bbr-btn{
+        background: #fd1717;
+        padding: 10px;
+        font-size: 10px;
+        color: #fff;
+        border-radius: 25px;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-weight: 600;
+        display: inline-block;
+        &:hover{
+          animation-name: bbr-animation-pulse;
+          animation-duration: 1s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+
+      }
+  }
+
+  &--overall-rating{
+    padding-left: 20px;
+
+    @media (max-width: $screen-tab){
+      padding-left: 10px;
+      padding-top: 20px;
+    }
+
+    @media (max-width: $screen-mb){
+      padding-top: 10px;
+    }
+
+  }
+
+  .bbr-overall-rating{
+    &--number{
+      font-size: 25px;
+      color: #333;
+      font-weight: 400;
+      text-align: center;
+      line-height: 110%;
+
+    }
+    &--stars{
+      .bbr-rating{
+        line-height: 20px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        .ico-star{
+          height: 10px;
+          width: 10px;
+          display: inline-block;
+          position: relative;
+
+          &:not(:last-child){
+            margin-right: 2px;
+          }
+
+          ._inner-star,&:before,&:after{
+            width: 100%;
+            background-size: cover;
+            position: absolute;
+            height: 100%;
+            display: inline-block;
+            background-repeat: no-repeat;
+          }
+          ._inner-star{
+            width: 0;
+            background: #333;
+          }
+          &:before{
+            content: '';
+            background-color: #D7D7D7;
+          }
+          &:after{
+            content: '';
+            background-image: url(../images/icon-bg-star.svg);
+          }
+        }
+      }
+    }
+
+    &--text{
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      color: #333;
+      padding-top: 5px;
+      text-transform: uppercase;
+      line-height: normal;
+      @media (max-width: $screen-tab){
+        font-size: 13px;
+      }
+    }
+
+  }
+
+}
